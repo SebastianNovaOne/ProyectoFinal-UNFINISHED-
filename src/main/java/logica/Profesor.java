@@ -13,5 +13,17 @@ public class Profesor {
         this.especialidad = especialidad;
         this.horariosDisponibles = new ArrayList<>();
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Prueba getEspecialidad() {
+        return especialidad;
+    }
+
+    public List<String> getHorariosDisponibles() {
+        return horariosDisponibles;
+    }
 }
 

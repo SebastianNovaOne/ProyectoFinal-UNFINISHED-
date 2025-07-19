@@ -19,4 +19,12 @@ public class Reserva {
     private LocalDateTime fechaReserva;
     private Estado estado;
     private MetodoPago metodoPago;
+
+    public Reserva(Cliente cliente, ClaseParticular clase, LocalDateTime fechaReserva, MetodoPago metodoPago) {
+        this.cliente = cliente;
+        this.clase = clase;
+        this.fechaReserva = fechaReserva;
+        this.estado = Estado.CONFIRMADA;
+        this.metodoPago = metodoPago;
+    }
 }

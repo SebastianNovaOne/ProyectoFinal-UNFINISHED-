@@ -49,4 +49,12 @@ public class Cliente {
     public void eliminarClasesSeleccionadas() {
         clasesSeleccionadas.clear();
     }
+
+    public void confirmarClasesSeleccionadas(SistemaReserva sistemaReserva, Reserva.MetodoPago metodoPago) throws Exception {
+        for (ClaseParticular clase : clasesSeleccionadas) {
+            Reserva reserva = sistemaReserva.crearReserva(this, clase, metodoPago);
+            agregarReserva(reserva);
+        }
+        eliminarClasesSeleccionadas();
+    }
 }

@@ -27,4 +27,20 @@ public class Reserva {
         this.estado = Estado.CONFIRMADA;
         this.metodoPago = metodoPago;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public ClaseParticular getClase() {
+        return clase;
+    }
+
+    public LocalDateTime getFechaReserva() {
+        return fechaReserva;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
 }

@@ -3,8 +3,21 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que genera una encuesta compuesta por una lista de preguntas con sus respectivas alternativas,
+ * basada en el tipo de prueba elegida.
+ */
 public class GeneradorEncuesta {
 
+    /**
+     * Obtiene una lista de preguntas con sus respectivas alternativas para la encuesta
+     * asociada al tipo de prueba indicada.
+     *
+     * Cada pregunta tiene un enunciado y una lista de alternativas de respuesta.
+     *
+     * @param prueba La prueba para la que se generaran las preguntas con alternativas.
+     * @return Una lista de preguntas (La encuesta) asociada a la prueba seleccionada con sus alternativas.
+     */
     public static List<Pregunta> obtenerPreguntasPara(Prueba prueba) {
         List<Pregunta> preguntas = new ArrayList<>();
 
@@ -14,7 +27,6 @@ public class GeneradorEncuesta {
                 preguntas.add(new Pregunta("Marca tu nivel de conocimiento en: Algebra y Funciones", List.of("1 - Conocimiento Nulo", "2 - Conocimiento Bajo", "3 - Conocimiento Regular", "4 - Conocimiento Avanzado", "5 - Conocimiento Completo")));
                 preguntas.add(new Pregunta("Marca tu nivel de conocimiento en: Geometria", List.of("1 - Conocimiento Nulo", "2 - Conocimiento Bajo", "3 - Conocimiento Regular", "4 - Conocimiento Avanzado", "5 - Conocimiento Completo")));
                 preguntas.add(new Pregunta("Marca tu nivel de conocimiento en: Probabilidad y Estadistica", List.of("1 - Conocimiento Nulo", "2 - Conocimiento Bajo", "3 - Conocimiento Regular", "4 - Conocimiento Avanzado", "5 - Conocimiento Completo")));
-
             }
             case MATEMATICA_M2 -> {
                 preguntas.add(new Pregunta("Marca tu nivel de conocimiento en: Aritmetica M2", List.of("1 - Conocimiento Nulo", "2 - Conocimiento Bajo", "3 - Conocimiento Regular", "4 - Conocimiento Avanzado", "5 - Conocimiento Completo")));
@@ -23,7 +35,7 @@ public class GeneradorEncuesta {
                 preguntas.add(new Pregunta("Marca tu nivel de conocimiento en: Probabilidad y Estadistica M2", List.of("1 - Conocimiento Nulo", "2 - Conocimiento Bajo", "3 - Conocimiento Regular", "4 - Conocimiento Avanzado", "5 - Conocimiento Completo")));
             }
             case COMPETENCIA_LECTORA -> {
-                preguntas.add(new Pregunta("Marca tu nivel de conocimiento en: Localizacion de Informacion ", List.of("1 - Conocimiento Nulo", "2 - Conocimiento Bajo", "3 - Conocimiento Regular", "4 - Conocimiento Avanzado", "5 - Conocimiento Completo")));
+                preguntas.add(new Pregunta("Marca tu nivel de conocimiento en: Localizacion de Informacion", List.of("1 - Conocimiento Nulo", "2 - Conocimiento Bajo", "3 - Conocimiento Regular", "4 - Conocimiento Avanzado", "5 - Conocimiento Completo")));
                 preguntas.add(new Pregunta("Marca tu nivel de conocimiento en: Capacidad de Interpretacion e Inferencia", List.of("1 - Conocimiento Nulo", "2 - Conocimiento Bajo", "3 - Conocimiento Regular", "4 - Conocimiento Avanzado", "5 - Conocimiento Completo")));
                 preguntas.add(new Pregunta("Marca tu nivel de conocimiento en: Capacidad de Evaluacion y Analisis", List.of("1 - Conocimiento Nulo", "2 - Conocimiento Bajo", "3 - Conocimiento Regular", "4 - Conocimiento Avanzado", "5 - Conocimiento Completo")));
             }

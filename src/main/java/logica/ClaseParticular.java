@@ -53,4 +53,19 @@ public class ClaseParticular {
         return fechaHora;
     }
 
+    public boolean reservarCupo() {
+        if (cuposReservados < cuposTotales) {
+            cuposReservados++;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean liberarCupo() {
+        if (cuposReservados > 0) {
+            cuposReservados--;
+            return true;
+        }
+        return false;
+    }
 }

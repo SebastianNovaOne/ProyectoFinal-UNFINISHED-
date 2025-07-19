@@ -36,4 +36,20 @@ public class SistemaReserva {
     public void agregarClase(ClaseParticular clase) {
         clases.add(clase);
     }
+
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public List<Profesor> getProfesores() {
+        return profesores;
+    }
+
+    public List<ClaseParticular> getClases() {
+        return clases;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
 }

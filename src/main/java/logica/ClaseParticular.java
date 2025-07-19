@@ -20,4 +20,37 @@ public class ClaseParticular {
         this.cuposTotales = cuposTotales;
         this.cuposReservados = 0;
     }
+
+    public Prueba getTipoPrueba() {
+        return tipoPrueba;
+    }
+
+    public Profesor getProfesor() {
+        return profesor;
+    }
+
+    public LocalDateTime getHorario() {
+        return horario;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public int getCuposTotales() {
+        return cuposTotales;
+    }
+
+    public int getCuposReservados() {
+        return cuposReservados;
+    }
+
+    public int getCuposDisponibles() {
+        return cuposTotales - cuposReservados;
+    }
+
+    public LocalDateTime getFechaHora() {
+        return fechaHora;
+    }
+
 }

@@ -31,4 +31,22 @@ public class Cliente {
     public List<ClaseParticular> getClasesSeleccionadas() {
         return clasesSeleccionadas;
     }
+
+    public void agregarReserva(Reserva reserva) {
+        historialReservas.add(reserva);
+    }
+
+    public void eliminarReserva(Reserva reserva) {
+        historialReservas.remove(reserva);
+    }
+
+
+    public void agregarClaseSeleccionada(ClaseParticular clase) {
+        clasesSeleccionadas.add(clase);
+    }
+
+
+    public void eliminarClasesSeleccionadas() {
+        clasesSeleccionadas.clear();
+    }
 }

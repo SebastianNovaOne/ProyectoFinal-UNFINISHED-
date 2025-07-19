@@ -17,4 +17,23 @@ public class SistemaReserva {
         clases = new ArrayList<>();
         reservas = new ArrayList<>();
     }
+
+    public static SistemaReserva getInstancia() {
+        if (instancia == null) {
+            instancia = new SistemaReserva();
+        }
+        return instancia;
+    }
+
+    public void agregarCliente(Cliente cliente) {
+        clientes.add(cliente);
+    }
+
+    public void agregarProfesor(Profesor profesor) {
+        profesores.add(profesor);
+    }
+
+    public void agregarClase(ClaseParticular clase) {
+        clases.add(clase);
+    }
 }

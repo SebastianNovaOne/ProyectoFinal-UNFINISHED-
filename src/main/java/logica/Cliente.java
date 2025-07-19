@@ -15,4 +15,20 @@ public class Cliente {
         this.historialReservas = new ArrayList<>();
         this.clasesSeleccionadas = new ArrayList<>();
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getContacto() {
+        return contacto;
+    }
+
+    public List<Reserva> getHistorialReservas() {
+        return historialReservas;
+    }
+
+    public List<ClaseParticular> getClasesSeleccionadas() {
+        return clasesSeleccionadas;
+    }
 }

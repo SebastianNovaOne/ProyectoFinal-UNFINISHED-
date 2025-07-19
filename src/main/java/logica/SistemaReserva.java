@@ -64,4 +64,11 @@ public class SistemaReserva {
         cliente.agregarReserva(reserva);
         return reserva;
     }
+
+    public void cancelarReserva(Reserva reserva) throws Exception {
+        if (!reservas.contains(reserva)) {
+            throw new Exception("Reserva no encontrada.");
+        }
+        reserva.cancelar();
+    }
 }

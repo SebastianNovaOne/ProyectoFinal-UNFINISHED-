@@ -25,5 +25,19 @@ public class Profesor {
     public List<String> getHorariosDisponibles() {
         return horariosDisponibles;
     }
+
+    public void agregarHorarioDisponible(String horario) {
+        if (!horariosDisponibles.contains(horario)) {
+            horariosDisponibles.add(horario);
+        }
+    }
+
+    public void eliminarHorarioDisponible(String horario) {
+        horariosDisponibles.remove(horario);
+    }
+
+    public boolean estaDisponible(String horario) {
+        return horariosDisponibles.contains(horario);
+    }
 }
 

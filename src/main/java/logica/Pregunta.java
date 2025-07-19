@@ -10,4 +10,12 @@ public class Pregunta {
         this.enunciado = enunciado;
         this.opciones = opciones;
     }
+
+    public String getEnunciado() {
+        return enunciado;
+    }
+
+    public List<String> getOpciones() {
+        return opciones;
+    }
 }

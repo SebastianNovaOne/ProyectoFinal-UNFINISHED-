@@ -52,4 +52,16 @@ public class SistemaReserva {
     public List<Reserva> getReservas() {
         return reservas;
     }
+
+    public Reserva crearReserva(Cliente cliente, ClaseParticular clase, Reserva.MetodoPago metodoPago) throws CupoExcedidoException {
+        if (clase.getCuposDisponibles() == 0) {
+            throw new CupoExcedidoException("No hay cupo disponible para esta clase.");
+        }
+
+        Reserva reserva = new Reserva(cliente, clase, java.time.LocalDateTime.now(), metodoPago);
+        reservas.add(reserva);
+        clase.reservarCupo();
+        cliente.agregarReserva(reserva);
+        return reserva;
+    }
 }

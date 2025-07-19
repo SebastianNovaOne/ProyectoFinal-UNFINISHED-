@@ -43,4 +43,17 @@ public class Reserva {
     public Estado getEstado() {
         return estado;
     }
+
+    public void cancelar() {
+        this.estado = Estado.CANCELADA;
+        clase.liberarCupo();
+    }
+
+    public boolean estaConfirmada() {
+        return estado == Estado.CONFIRMADA;
+    }
+
+    public MetodoPago getMetodoPago() {
+        return metodoPago;
+    }
 }

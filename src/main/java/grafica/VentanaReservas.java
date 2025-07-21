@@ -15,6 +15,20 @@ public class VentanaReservas extends JFrame {
     private DefaultTableModel modeloTabla;
     private JButton btnCancelarReserva;
 
+    public VentanaReservas(Cliente cliente) {
+        super("Reservas de " + cliente.getNombre());
+        this.clienteActual = cliente;
+        sistemaReserva = SistemaReserva.getInstancia();
+
+        inicializarComponentes();
+        cargarReservas();
+        configurarEventos();
+
+        setSize(700, 400);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+
     private void inicializarComponentes() {
         String[] columnas = {"Prueba", "Profesor", "Fecha y Hora Clase", "Fecha Reserva", "Método de Pago", "Estado"};
         modeloTabla = new DefaultTableModel(columnas, 0) {

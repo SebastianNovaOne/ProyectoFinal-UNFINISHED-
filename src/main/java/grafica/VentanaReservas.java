@@ -35,4 +35,23 @@ public class VentanaReservas extends JFrame {
         getContentPane().add(scrollPane, BorderLayout.CENTER);
         getContentPane().add(panelInferior, BorderLayout.SOUTH);
     }
+
+    private void cargarReservas() {
+        modeloTabla.setRowCount(0);
+        List<Reserva> reservas = sistemaReserva.getReservasPorCliente(clienteActual);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        for (Reserva reserva : reservas) {
+            ClaseParticular clase = reserva.getClase();
+            Object[] fila = {
+                    clase.getTipoPrueba(),
+                    clase.getProfesor().getNombre(),
+                    clase.getFechaHora().format(formatter),
+                    reserva.getFechaReserva().format(formatter),
+                    reserva.getMetodoPago(),
+                    reserva.getEstado()
+            };
+            modeloTabla.addRow(fila);
+        }
+    }
 }

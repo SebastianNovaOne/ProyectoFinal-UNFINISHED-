@@ -39,7 +39,7 @@ public class VentanaAgregarClase extends JFrame {
         cargarProfesores();
         add(comboProfesor);
 
-        add(new JLabel("Fecha y Hora (yyyy-MM-dd HH:mm):"));
+        add(new JLabel("Fecha y Hora (yyyy-MM-dd HH:mm) (EJEMPLO: 2025-10-10 17:00):"));
         txtFechaHora = new JTextField();
         add(txtFechaHora);
 
@@ -61,7 +61,7 @@ public class VentanaAgregarClase extends JFrame {
         add(new JLabel(""));
         add(btnAgregarClase);
 
-        btnGestionarProfesores = new JButton("Gestionar Profesores");
+        btnGestionarProfesores = new JButton("Añadir Profesores");
         btnGestionarProfesores.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

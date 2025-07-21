@@ -52,7 +52,7 @@ public class VentanaPrincipal extends JFrame {
             }
         });
 
-        panel.add(new JLabel("Bienvenido al sistema de reservas", SwingConstants.CENTER));
+        panel.add(new JLabel("Bienvenido al sistema de reservas de clases particulares!!!", SwingConstants.CENTER));
         panel.add(btnCliente);
         panel.add(btnProfesor);
         panel.add(btnSalir);

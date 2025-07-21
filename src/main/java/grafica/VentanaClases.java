@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.format.DateTimeFormatter;
+import java.util.Enumeration;
 import java.util.List;
 
 public class VentanaClases extends JFrame {
@@ -87,7 +88,14 @@ public class VentanaClases extends JFrame {
             try {
                 sistemaReserva.crearReserva(clienteActual, claseSeleccionada, metodoPago);
                 JOptionPane.showMessageDialog(this, "Reserva creada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+                List<Pregunta> preguntas = GeneradorEncuesta.obtenerPreguntasPara(claseSeleccionada.getTipoPrueba());
+                EncuestaNivel encuesta = new EncuestaNivel(preguntas);
+
+                mostrarEncuesta(encuesta);
+
                 cargarClases();
+
             } catch (CupoExcedidoException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de Cupo", JOptionPane.ERROR_MESSAGE);
             } catch (Exception ex) {
@@ -99,5 +107,63 @@ public class VentanaClases extends JFrame {
             dispose();
             new VentanaPrincipal().setVisible(true);
         });
+    }
+
+    private void mostrarEncuesta(EncuestaNivel encuesta) {
+        JFrame ventanaEncuesta = new JFrame("Encuesta de Preparacion");
+        ventanaEncuesta.setSize(900, 800);
+        ventanaEncuesta.setLocationRelativeTo(this);
+        ventanaEncuesta.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JPanel panelEncuesta = new JPanel();
+        panelEncuesta.setLayout(new BoxLayout(panelEncuesta, BoxLayout.Y_AXIS));
+
+        List<Pregunta> preguntas = encuesta.obtenerPreguntas();
+        ButtonGroup[] gruposRespuestas = new ButtonGroup[preguntas.size()];
+
+        for (int i = 0; i < preguntas.size(); i++) {
+            Pregunta pregunta = preguntas.get(i);
+            JPanel panelPregunta = new JPanel();
+            panelPregunta.setLayout(new BoxLayout(panelPregunta, BoxLayout.Y_AXIS));
+
+            panelPregunta.add(new JLabel(pregunta.getEnunciado()));
+
+            gruposRespuestas[i] = new ButtonGroup();
+
+            for (String alternativa : pregunta.getOpciones()) {
+                JRadioButton radioButton = new JRadioButton(alternativa);
+                gruposRespuestas[i].add(radioButton);
+                panelPregunta.add(radioButton);
+            }
+
+            panelEncuesta.add(panelPregunta);
+        }
+
+        JPanel panelBotones = new JPanel();
+        JButton btnEnviarEncuesta = new JButton("Enviar Encuesta");
+        JButton btnCancelar = new JButton("Cancelar");
+
+        panelBotones.add(btnEnviarEncuesta);
+        panelBotones.add(btnCancelar);
+
+        panelEncuesta.add(panelBotones);
+
+        ventanaEncuesta.getContentPane().add(panelEncuesta);
+        ventanaEncuesta.setVisible(true);
+
+        btnEnviarEncuesta.addActionListener(e -> {
+            for (int i = 0; i < preguntas.size(); i++) {
+                ButtonGroup grupo = gruposRespuestas[i];
+                for (Enumeration<AbstractButton> buttons = grupo.getElements(); buttons.hasMoreElements();) {
+                    JRadioButton button = (JRadioButton) buttons.nextElement();
+                    if (button.isSelected()) {
+                        System.out.println("Respuesta para '" + preguntas.get(i).getEnunciado() + "': " + button.getText());
+                    }
+                }
+            }
+            JOptionPane.showMessageDialog(ventanaEncuesta, "Gracias por completar la encuesta.", "Encuesta Enviada", JOptionPane.INFORMATION_MESSAGE);
+            ventanaEncuesta.dispose();
+        });
+        btnCancelar.addActionListener(e -> ventanaEncuesta.dispose());
     }
 }

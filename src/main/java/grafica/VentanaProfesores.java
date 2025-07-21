@@ -48,4 +48,19 @@ public class VentanaProfesores extends JFrame {
             ventanaAgregarClase.actualizarComboProfesores();
         }
     }
+
+    private void eliminarProfesor() {
+        Profesor seleccionado = listaProfesores.getSelectedValue();
+        if (seleccionado != null) {
+            int confirm = JOptionPane.showConfirmDialog(this, "¿Eliminar profesor " + seleccionado.getNombre() + "?",
+                    "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                sistema.getProfesores().remove(seleccionado);
+                modeloProfesores.removeElement(seleccionado);
+                ventanaAgregarClase.actualizarComboProfesores();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un profesor para eliminar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+    }
 }

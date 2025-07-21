@@ -54,5 +54,30 @@ public class VentanaClientes extends JFrame {
                 registrarCliente();
             }
         });
+
+        btnVolver = new JButton("Volver");
+        btnVolver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new VentanaPrincipal().setVisible(true);
+            }
+        });
+        panel.add(btnVolver, BorderLayout.SOUTH);
+    }
+
+    private void registrarCliente() {
+        String nombre = nombreField.getText().trim();
+        String contacto = contactoField.getText().trim();
+
+        if (!nombre.isEmpty() && !contacto.isEmpty()) {
+            Cliente cliente = new Cliente(nombre, contacto);
+            SistemaReserva.getInstancia().agregarCliente(cliente);
+            modeloListaClientes.addElement(cliente);
+            nombreField.setText("");
+            contactoField.setText("");
+        } else {
+            JOptionPane.showMessageDialog(VentanaClientes.this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

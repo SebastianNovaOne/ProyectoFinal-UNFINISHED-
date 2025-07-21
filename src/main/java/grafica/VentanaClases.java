@@ -60,4 +60,32 @@ public class VentanaClases extends JFrame {
             modeloTabla.addRow(fila);
         }
     }
+
+    private void setEventos() {
+        btnReservar.addActionListener(e -> {
+            int filaSeleccionada = tablaClases.getSelectedRow();
+            if (filaSeleccionada == -1) {
+                JOptionPane.showMessageDialog(this, "Por favor, seleccione una clase para reservar.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            ClaseParticular claseSeleccionada = sistemaReserva.getClases().get(filaSeleccionada);
+            Reserva.MetodoPago metodoPago = (Reserva.MetodoPago) comboMetodoPago.getSelectedItem();
+
+            try {
+                sistemaReserva.crearReserva(clienteActual, claseSeleccionada, metodoPago);
+                JOptionPane.showMessageDialog(this, "Reserva creada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                cargarClases();
+            } catch (CupoExcedidoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de Cupo", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error al crear la reserva: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        btnVolver.addActionListener(e -> {
+            dispose();
+            new VentanaPrincipal().setVisible(true);
+        });
+    }
 }

@@ -7,6 +7,11 @@ import java.awt.*;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Ventana para gestionar y visualizar las reservas de un cliente.
+ * Permite ver las reservas actuales, cancelarlas y muestra los detalles
+ * de cada reserva realizada por el cliente.
+ */
 public class VentanaReservas extends JFrame {
 
     private SistemaReserva sistemaReserva;
@@ -15,6 +20,11 @@ public class VentanaReservas extends JFrame {
     private DefaultTableModel modeloTabla;
     private JButton btnCancelarReserva;
 
+    /**
+     * Constructor de la ventana de reservas.
+     *
+     * @param cliente El cliente cuyas reservas seran mostradas.
+     */
     public VentanaReservas(Cliente cliente) {
         super("Reservas de " + cliente.getNombre());
         this.clienteActual = cliente;
@@ -29,6 +39,9 @@ public class VentanaReservas extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
+    /**
+     * Inicia los componentes de la ventana (tabla y botones).
+     */
     private void inicializarComponentes() {
         String[] columnas = {"Prueba", "Profesor", "Fecha y Hora Clase", "Fecha Reserva", "Método de Pago", "Estado"};
         modeloTabla = new DefaultTableModel(columnas, 0) {
@@ -50,6 +63,9 @@ public class VentanaReservas extends JFrame {
         getContentPane().add(panelInferior, BorderLayout.SOUTH);
     }
 
+    /**
+     * Carga las reservas del cliente en la tabla.
+     */
     private void cargarReservas() {
         modeloTabla.setRowCount(0);
         List<Reserva> reservas = sistemaReserva.getReservasPorCliente(clienteActual);
@@ -69,6 +85,9 @@ public class VentanaReservas extends JFrame {
         }
     }
 
+    /**
+     * Configura los eventos asociados a los botones en la ventana.
+     */
     private void configurarEventos() {
         btnCancelarReserva.addActionListener(e -> {
             int filaSeleccionada = tablaReservas.getSelectedRow();

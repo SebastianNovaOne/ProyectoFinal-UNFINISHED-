@@ -20,6 +20,13 @@ public class VentanaAgregarClase extends JFrame {
     private JButton btnGestionarProfesores;
     private JButton btnVolver;
 
+    private void cargarProfesores() {
+        List<Profesor> profesores = sistemaReserva.getProfesores();
+        for (Profesor profesor : profesores) {
+            comboProfesor.addItem(profesor);
+        }
+    }
+
     private void agregarClase() {
         try {
             Prueba tipoPrueba = (Prueba) comboTipoPrueba.getSelectedItem();
@@ -53,5 +60,10 @@ public class VentanaAgregarClase extends JFrame {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al agregar la clase: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public void actualizarComboProfesores() {
+        comboProfesor.removeAllItems();
+        cargarProfesores();
     }
 }

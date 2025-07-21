@@ -77,4 +77,17 @@ public class VentanaProfesores extends JFrame {
             JOptionPane.showMessageDialog(this, "Seleccione un profesor para ver detalles.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }
+
+    private static class ProfesorCellRenderer extends DefaultListCellRenderer {
+        @Override
+        public Component getListCellRendererComponent(JList<?> list, Object value,
+                                                      int index, boolean isSelected, boolean cellHasFocus) {
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            if (value instanceof Profesor) {
+                Profesor prof = (Profesor) value;
+                setText(prof.getNombre());
+            }
+            return this;
+        }
+    }
 }

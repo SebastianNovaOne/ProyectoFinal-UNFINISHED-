@@ -15,7 +15,6 @@ public class VentanaPrincipal extends JFrame {
     private JButton btnGestionarClientes;
     private JButton btnGestionarClases;
     private JButton btnGestionarReservas;
-    private JButton btnSalirCliente;
     private JButton btnVolver;
 
     public VentanaPrincipal() {
@@ -68,7 +67,6 @@ public class VentanaPrincipal extends JFrame {
         btnGestionarClientes = new JButton("Añadir Clientes");
         btnGestionarClases = new JButton("Gestionar Clases");
         btnGestionarReservas = new JButton("Gestionar Reservas");
-        btnSalirCliente = new JButton("Salir");
         btnVolver = new JButton("Volver");
 
         btnGestionarClientes.addActionListener(new ActionListener() {
@@ -101,14 +99,6 @@ public class VentanaPrincipal extends JFrame {
             }
         });
 
-        btnSalirCliente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                new VentanaPrincipal().setVisible(true);
-            }
-        });
-
         btnVolver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,7 +112,6 @@ public class VentanaPrincipal extends JFrame {
         panelCliente.add(btnGestionarClientes);
         panelCliente.add(btnGestionarClases);
         panelCliente.add(btnGestionarReservas);
-        panelCliente.add(btnSalirCliente);
         panelCliente.add(btnVolver);
 
         add(panelCliente);

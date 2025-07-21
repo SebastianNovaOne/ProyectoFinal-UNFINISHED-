@@ -63,4 +63,18 @@ public class VentanaProfesores extends JFrame {
             JOptionPane.showMessageDialog(this, "Seleccione un profesor para eliminar.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }
+
+    private void mostrarDetalles() {
+        Profesor seleccionado = listaProfesores.getSelectedValue();
+        if (seleccionado != null) {
+            StringBuilder detalles = new StringBuilder();
+            detalles.append("Nombre: ").append(seleccionado.getNombre()).append("\n");
+            detalles.append("Especialidad: ").append(seleccionado.getEspecialidad().name()).append("\n");
+            detalles.append("Horarios disponibles: ").append(String.join(", ", seleccionado.getHorariosDisponibles()));
+
+            JOptionPane.showMessageDialog(this, detalles.toString(), "Detalles del Profesor", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un profesor para ver detalles.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+    }
 }

@@ -43,4 +43,21 @@ public class VentanaClases extends JFrame {
         getContentPane().add(scrollPane, BorderLayout.CENTER);
         getContentPane().add(panelInferior, BorderLayout.SOUTH);
     }
+
+    private void cargarClases() {
+        modeloTabla.setRowCount(0);
+        List<ClaseParticular> clases = sistemaReserva.getClases();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        for (ClaseParticular clase : clases) {
+            Object[] fila = {
+                    clase.getTipoPrueba(),
+                    clase.getProfesor().getNombre(),
+                    clase.getFechaHora().format(formatter),
+                    clase.getDuracion(),
+                    clase.getCuposDisponibles()
+            };
+            modeloTabla.addRow(fila);
+        }
+    }
 }

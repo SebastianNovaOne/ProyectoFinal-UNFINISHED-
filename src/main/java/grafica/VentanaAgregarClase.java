@@ -20,6 +20,71 @@ public class VentanaAgregarClase extends JFrame {
     private JButton btnGestionarProfesores;
     private JButton btnVolver;
 
+    public VentanaAgregarClase() {
+        sistemaReserva = SistemaReserva.getInstancia();
+
+        setTitle("Agregar Clase");
+        setSize(800, 700);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        setLayout(new GridLayout(9, 2, 10, 10));
+
+        add(new JLabel("Tipo de Prueba:"));
+        comboTipoPrueba = new JComboBox<>(Prueba.values());
+        add(comboTipoPrueba);
+
+        add(new JLabel("Profesor:"));
+        comboProfesor = new JComboBox<>();
+        cargarProfesores();
+        add(comboProfesor);
+
+        add(new JLabel("Fecha y Hora (yyyy-MM-dd HH:mm):"));
+        txtFechaHora = new JTextField();
+        add(txtFechaHora);
+
+        add(new JLabel("Duración (min):"));
+        txtDuracion = new JTextField();
+        add(txtDuracion);
+
+        add(new JLabel("Cupos Disponibles:"));
+        txtCupos = new JTextField();
+        add(txtCupos);
+
+        btnAgregarClase = new JButton("Agregar Clase");
+        btnAgregarClase.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                agregarClase();
+            }
+        });
+        add(new JLabel(""));
+        add(btnAgregarClase);
+
+        btnGestionarProfesores = new JButton("Gestionar Profesores");
+        btnGestionarProfesores.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new VentanaProfesores(VentanaAgregarClase.this).setVisible(true);
+            }
+        });
+        add(new JLabel(""));
+        add(btnGestionarProfesores);
+
+        btnVolver = new JButton("Volver");
+        btnVolver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new VentanaPrincipal().setVisible(true);
+            }
+        });
+        add(new JLabel(""));
+        add(btnVolver);
+
+        setVisible(true);
+    }
+
     private void cargarProfesores() {
         List<Profesor> profesores = sistemaReserva.getProfesores();
         for (Profesor profesor : profesores) {

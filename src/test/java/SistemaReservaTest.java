@@ -51,7 +51,7 @@ public class SistemaReservaTest {
     void testCancelarReservaExitosa() throws Exception {
         Reserva reserva = sistema.crearReserva(cliente, clase, Reserva.MetodoPago.TARJETA_CREDITO);
         sistema.cancelarReserva(reserva);
-        assertFalse(reserva.estaConfirmada());
+        assertFalse(reserva.confirmar());
     }
 
     @Test

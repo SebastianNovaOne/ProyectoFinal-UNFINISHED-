@@ -97,7 +97,7 @@ public class Reserva {
      *
      * @return true si la reserva esta confirmada, false si esta cancelada.
      */
-    public boolean estaConfirmada() {
+    public boolean confirmar() {
         return estado == Estado.CONFIRMADA;
     }
 

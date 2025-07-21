@@ -157,7 +157,7 @@ public class SistemaReserva {
     public List<Reserva> getReservasPorCliente(Cliente cliente) {
         List<Reserva> resultado = new ArrayList<>();
         for (Reserva r : reservas) {
-            if (r.getCliente().equals(cliente) && r.estaConfirmada()) {
+            if (r.getCliente().equals(cliente) && r.confirmar()) {
                 resultado.add(r);
             }
         }

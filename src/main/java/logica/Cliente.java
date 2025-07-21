@@ -10,7 +10,6 @@ import java.util.List;
 public class Cliente {
 
     private String nombre;
-    private String contacto;
     private List<Reserva> historialReservas;
     private List<ClaseParticular> clasesSeleccionadas;
 
@@ -21,7 +20,6 @@ public class Cliente {
      */
     public Cliente(String nombre, String contacto) {
         this.nombre = nombre;
-        this.contacto = contacto;
         this.historialReservas = new ArrayList<>();
         this.clasesSeleccionadas = new ArrayList<>();
     }
@@ -32,14 +30,6 @@ public class Cliente {
      */
     public String getNombre() {
         return nombre;
-    }
-
-    /**
-     * Obtiene la informacion de contacto del cliente.
-     * @return El contacto del cliente.
-     */
-    public String getContacto() {
-        return contacto;
     }
 
     /**

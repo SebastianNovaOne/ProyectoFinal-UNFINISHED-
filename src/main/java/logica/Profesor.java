@@ -52,37 +52,6 @@ public class Profesor {
         return horariosDisponibles;
     }
 
-    /**
-     * Agrega un nuevo horario a la lista de horarios disponibles del profesor.
-     * Si el horario ya existe, no se agrega nuevamente.
-     *
-     * @param horario El horario que se desea agregar.
-     */
-    public void agregarHorarioDisponible(String horario) {
-        if (!horariosDisponibles.contains(horario)) {
-            horariosDisponibles.add(horario);
-        }
-    }
-
-    /**
-     * Elimina un horario de la lista de horarios disponibles del profesor.
-     *
-     * @param horario El horario que se desea eliminar.
-     */
-    public void eliminarHorarioDisponible(String horario) {
-        horariosDisponibles.remove(horario);
-    }
-
-    /**
-     * Verifica si el profesor está disponible en un horario especifico.
-     *
-     * @param horario El horario que se desea verificar.
-     * @return true si el profesor esta disponible en el horario, false en caso contrario.
-     */
-    public boolean estaDisponible(String horario) {
-        return horariosDisponibles.contains(horario);
-    }
-
     @Override
     public String toString() {
         return nombre;

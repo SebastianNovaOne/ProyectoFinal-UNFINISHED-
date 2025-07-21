@@ -68,22 +68,6 @@ public class ClaseParticular {
     }
 
     /**
-     * Obtiene el numero total de cupos disponibles para la clase.
-     * @return El total de cupos.
-     */
-    public int getCuposTotales() {
-        return cuposTotales;
-    }
-
-    /**
-     * Obtiene el numero de cupos que han sido reservados para la clase.
-     * @return El numero de cupos reservados.
-     */
-    public int getCuposReservados() {
-        return cuposReservados;
-    }
-
-    /**
      * Obtiene el numero de cupos disponibles para la clase.
      * @return El numero de cupos disponibles.
      */

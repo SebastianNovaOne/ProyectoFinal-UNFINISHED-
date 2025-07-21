@@ -54,4 +54,32 @@ public class VentanaReservas extends JFrame {
             modeloTabla.addRow(fila);
         }
     }
+
+    private void configurarEventos() {
+        btnCancelarReserva.addActionListener(e -> {
+            int filaSeleccionada = tablaReservas.getSelectedRow();
+            if (filaSeleccionada == -1) {
+                JOptionPane.showMessageDialog(this, "Seleccione una reserva para cancelar.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Reserva reservaSeleccionada = sistemaReserva.getReservasPorCliente(clienteActual).get(filaSeleccionada);
+
+            if (reservaSeleccionada.getEstado() == Reserva.Estado.CANCELADA) {
+                JOptionPane.showMessageDialog(this, "La reserva ya está cancelada.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+            int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea cancelar esta reserva?", "Confirmar Cancelación", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                try {
+                    sistemaReserva.cancelarReserva(reservaSeleccionada);
+                    JOptionPane.showMessageDialog(this, "Reserva cancelada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    cargarReservas();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Error al cancelar la reserva: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+    }
 }

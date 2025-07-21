@@ -60,4 +60,73 @@ public class VentanaPrincipal extends JFrame {
 
         add(panel);
     }
+
+    private void mostrarOpcionesCliente() {
+        JPanel panelCliente = new JPanel(new GridLayout(5, 1, 10, 10));
+        panelCliente.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
+
+        btnGestionarClientes = new JButton("Añadir Clientes");
+        btnGestionarClases = new JButton("Gestionar Clases");
+        btnGestionarReservas = new JButton("Gestionar Reservas");
+        btnSalirCliente = new JButton("Salir");
+        btnVolver = new JButton("Volver");
+
+        btnGestionarClientes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new VentanaClientes().setVisible(true);
+                dispose();
+            }
+        });
+
+        btnGestionarClases.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Cliente clienteSeleccionado = seleccionarClienteDialogo();
+                if (clienteSeleccionado != null) {
+                    new VentanaClases(clienteSeleccionado).setVisible(true);
+                    dispose();
+                }
+            }
+        });
+
+        btnGestionarReservas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Cliente clienteSeleccionado = seleccionarClienteDialogo();
+                if (clienteSeleccionado != null) {
+                    new VentanaReservas(clienteSeleccionado).setVisible(true);
+                    dispose();
+                }
+            }
+        });
+
+        btnSalirCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new VentanaPrincipal().setVisible(true);
+            }
+        });
+
+        btnVolver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new VentanaPrincipal().setVisible(true);
+            }
+        });
+
+        getContentPane().removeAll();
+        panelCliente.add(new JLabel("Opciones de Cliente", SwingConstants.CENTER));
+        panelCliente.add(btnGestionarClientes);
+        panelCliente.add(btnGestionarClases);
+        panelCliente.add(btnGestionarReservas);
+        panelCliente.add(btnSalirCliente);
+        panelCliente.add(btnVolver);
+
+        add(panelCliente);
+        revalidate();
+        repaint();
+    }
 }

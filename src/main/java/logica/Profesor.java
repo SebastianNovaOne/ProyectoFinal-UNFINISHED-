@@ -82,4 +82,9 @@ public class Profesor {
     public boolean estaDisponible(String horario) {
         return horariosDisponibles.contains(horario);
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

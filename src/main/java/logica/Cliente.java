@@ -103,4 +103,9 @@ public class Cliente {
         }
         eliminarClasesSeleccionadas();
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

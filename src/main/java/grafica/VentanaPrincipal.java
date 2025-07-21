@@ -20,7 +20,7 @@ public class VentanaPrincipal extends JFrame {
     public VentanaPrincipal() {
         setTitle("Sistema de Reservas");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
+        setSize(800, 600);
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel(new GridLayout(5, 1, 10, 10));
@@ -64,9 +64,9 @@ public class VentanaPrincipal extends JFrame {
         JPanel panelCliente = new JPanel(new GridLayout(5, 1, 10, 10));
         panelCliente.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
 
-        btnGestionarClientes = new JButton("Añadir Clientes");
-        btnGestionarClases = new JButton("Gestionar Clases");
-        btnGestionarReservas = new JButton("Gestionar Reservas");
+        btnGestionarClientes = new JButton("Registrarse como Cliente");
+        btnGestionarClases = new JButton("Buscar Clases");
+        btnGestionarReservas = new JButton("Ver Mis Reservas");
         btnVolver = new JButton("Volver");
 
         btnGestionarClientes.addActionListener(new ActionListener() {
@@ -108,7 +108,7 @@ public class VentanaPrincipal extends JFrame {
         });
 
         getContentPane().removeAll();
-        panelCliente.add(new JLabel("Opciones de Cliente", SwingConstants.CENTER));
+        panelCliente.add(new JLabel("Interfaz de Cliente", SwingConstants.CENTER));
         panelCliente.add(btnGestionarClientes);
         panelCliente.add(btnGestionarClases);
         panelCliente.add(btnGestionarReservas);

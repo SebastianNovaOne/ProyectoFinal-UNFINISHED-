@@ -11,6 +11,39 @@ public class VentanaProfesores extends JFrame {
     private JList<Profesor> listaProfesores;
     private VentanaAgregarClase ventanaAgregarClase;
 
+    public VentanaProfesores(VentanaAgregarClase ventanaAgregarClase) {
+        this.ventanaAgregarClase = ventanaAgregarClase;
+        sistema = SistemaReserva.getInstancia();
+        setTitle("Gestión de Profesores");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        modeloProfesores = new DefaultListModel<>();
+        listaProfesores = new JList<>(modeloProfesores);
+        listaProfesores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listaProfesores.setCellRenderer(new ProfesorCellRenderer());
+
+        JScrollPane scroll = new JScrollPane(listaProfesores);
+
+        JButton btnAgregar = new JButton("Agregar Profesor");
+        JButton btnEliminar = new JButton("Eliminar Profesor");
+        JButton btnDetalles = new JButton("Ver Detalles");
+
+        btnAgregar.addActionListener(e -> mostrarDialogo());
+        btnEliminar.addActionListener(e -> eliminarProfesor());
+        btnDetalles.addActionListener(e -> mostrarDetalles());
+
+        JPanel panelBotones = new JPanel();
+        panelBotones.add(btnAgregar);
+        panelBotones.add(btnEliminar);
+        panelBotones.add(btnDetalles);
+
+        add(scroll, BorderLayout.CENTER);
+        add(panelBotones, BorderLayout.SOUTH);
+
+    }
+
     private void mostrarDialogo() {
         JTextField nombreField = new JTextField();
         JTextField especialidadField = new JTextField();

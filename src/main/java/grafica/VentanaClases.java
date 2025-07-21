@@ -8,6 +8,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
 import java.util.List;
 
+/**
+ * Ventana que muestra las clases disponibles para que un cliente las reserve.
+ * Permite al cliente seleccionar una clase, elegir el metodo de pago y realizar una reserva.
+ * Al realizar la reserva, se muestra una encuesta para evaluar la preparacion de la clase.
+ */
 public class VentanaClases extends JFrame {
 
     private SistemaReserva sistemaReserva;
@@ -18,6 +23,11 @@ public class VentanaClases extends JFrame {
     private Cliente clienteActual;
     private JButton btnVolver;
 
+    /**
+     * Constructor de la ventana de clases disponibles.
+     * Inicia los componentes de la ventana, carga las clases y establece los eventos.
+     * @param cliente El cliente que esta visualizando las clases disponibles.
+     */
     public VentanaClases(Cliente cliente) {
         super("Clases Disponibles");
         this.clienteActual = cliente;
@@ -30,6 +40,11 @@ public class VentanaClases extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
+    /**
+     * Inicializa los componentes de la interfaz grafica.
+     * Crea la tabla para mostrar las clases disponibles, los botones para realizar la reserva
+     * y la selección del metodo de pago.
+     */
     private void inicializarComponentes() {
         String[] columnas = {"Prueba", "Profesor", "Fecha y Hora", "Duración (min)", "Cupos Disponibles"};
         modeloTabla = new DefaultTableModel(columnas, 0) {
@@ -57,6 +72,11 @@ public class VentanaClases extends JFrame {
         getContentPane().add(panelInferior, BorderLayout.SOUTH);
     }
 
+    /**
+     * Carga las clases disponibles en el sistema y las muestra en la tabla.
+     * Cada fila muestra el tipo de prueba, el nombre del profesor, la fecha y hora de la clase,
+     * la duración en minutos y los cupos disponibles.
+     */
     private void cargarClases() {
         modeloTabla.setRowCount(0);
         List<ClaseParticular> clases = sistemaReserva.getClases();
@@ -74,6 +94,11 @@ public class VentanaClases extends JFrame {
         }
     }
 
+    /**
+     * Establece los eventos para los botones de la ventana.
+     * Asocia las acciones de reserva de clase, como seleccionar una clase, elegir un metodo de pago
+     * y crear una reserva.
+     */
     private void setEventos() {
         btnReservar.addActionListener(e -> {
             int filaSeleccionada = tablaClases.getSelectedRow();
@@ -109,6 +134,12 @@ public class VentanaClases extends JFrame {
         });
     }
 
+    /**
+     * Muestra la ventana de encuesta de preparacion luego de realizar una reserva.
+     * La encuesta esta formada por una serie de preguntas de opcion multiple,
+     * y el usuario puede seleccionar sus respuestas.
+     * @param encuesta La encuesta que se muestra al usuario.
+     */
     private void mostrarEncuesta(EncuestaNivel encuesta) {
         JFrame ventanaEncuesta = new JFrame("Encuesta de Preparacion");
         ventanaEncuesta.setSize(900, 800);

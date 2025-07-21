@@ -4,6 +4,11 @@ import logica.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Ventana que permite gestionar los profesores en el sistema.
+ * Permite agregar, eliminar y ver detalles de los profesores registrados.
+ * Esta ventana es utilizada por la ventana de agregar clase para seleccionar un profesor para una clase.
+ */
 public class VentanaProfesores extends JFrame {
 
     private SistemaReserva sistema;
@@ -11,6 +16,13 @@ public class VentanaProfesores extends JFrame {
     private JList<Profesor> listaProfesores;
     private VentanaAgregarClase ventanaAgregarClase;
 
+    /**
+     * Constructor de la ventana de gestión de profesores.
+     * Inicializa la interfaz grafica con los componentes necesarios para mostrar la lista de profesores
+     * y los botones para agregar, eliminar y ver detalles de los profesores.
+     *
+     * @param ventanaAgregarClase La ventana que llama a esta ventana para actualizar su combo de profesores.
+     */
     public VentanaProfesores(VentanaAgregarClase ventanaAgregarClase) {
         this.ventanaAgregarClase = ventanaAgregarClase;
         sistema = SistemaReserva.getInstancia();
@@ -27,11 +39,11 @@ public class VentanaProfesores extends JFrame {
         JScrollPane scroll = new JScrollPane(listaProfesores);
 
         JButton btnAgregar = new JButton("Agregar Profesor");
-        JButton btnEliminar = new JButton("Eliminar Profesor");
+        JButton btnEliminar = new JButton("Remover Profesor");
         JButton btnDetalles = new JButton("Ver Detalles");
 
         btnAgregar.addActionListener(e -> mostrarDialogo());
-        btnEliminar.addActionListener(e -> eliminarProfesor());
+        btnEliminar.addActionListener(e -> removerProfesor());
         btnDetalles.addActionListener(e -> mostrarDetalles());
 
         JPanel panelBotones = new JPanel();
@@ -41,9 +53,13 @@ public class VentanaProfesores extends JFrame {
 
         add(scroll, BorderLayout.CENTER);
         add(panelBotones, BorderLayout.SOUTH);
-
     }
 
+    /**
+     * Muestra un cuadro de dialogo para ingresar los datos de un nuevo profesor.
+     * Los datos incluyen el nombre del profesor y su especialidad (uno de los valores del enum Prueba).
+     * Si los datos son validos, se agrega el nuevo profesor al sistema.
+     */
     private void mostrarDialogo() {
         JTextField nombreField = new JTextField();
         JTextField especialidadField = new JTextField();
@@ -78,25 +94,36 @@ public class VentanaProfesores extends JFrame {
             sistema.agregarProfesor(nuevo);
             modeloProfesores.addElement(nuevo);
 
+            // Actualiza el combo de profesores en la ventana de agregar clase
             ventanaAgregarClase.actualizarComboProfesores();
         }
     }
 
-    private void eliminarProfesor() {
+    /**
+     * Remueve el profesor seleccionado de la lista de profesores.
+     * Si no se selecciona un profesor, se muestra un mensaje de advertencia.
+     */
+    private void removerProfesor() {
         Profesor seleccionado = listaProfesores.getSelectedValue();
         if (seleccionado != null) {
-            int confirm = JOptionPane.showConfirmDialog(this, "¿Eliminar profesor " + seleccionado.getNombre() + "?",
+            int confirm = JOptionPane.showConfirmDialog(this, "¿Remover profesor " + seleccionado.getNombre() + "?",
                     "Confirmar", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
                 sistema.getProfesores().remove(seleccionado);
                 modeloProfesores.removeElement(seleccionado);
+
+                // Actualiza el combo de profesores en la ventana de agregar clase
                 ventanaAgregarClase.actualizarComboProfesores();
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Seleccione un profesor para eliminar.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Seleccione un profesor para remover.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }
 
+    /**
+     * Muestra los detalles del profesor seleccionado, como su nombre, especialidad y horarios disponibles.
+     * Si no se selecciona un profesor, se muestra un mensaje de advertencia.
+     */
     private void mostrarDetalles() {
         Profesor seleccionado = listaProfesores.getSelectedValue();
         if (seleccionado != null) {
@@ -111,6 +138,10 @@ public class VentanaProfesores extends JFrame {
         }
     }
 
+    /**
+     * Clase interna que personaliza la forma en que se renderiza cada elemento en la lista de profesores.
+     * Muestra el nombre del profesor en cada celda de la lista.
+     */
     private static class ProfesorCellRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value,

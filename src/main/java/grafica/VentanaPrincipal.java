@@ -129,4 +129,30 @@ public class VentanaPrincipal extends JFrame {
         revalidate();
         repaint();
     }
+
+    private Cliente seleccionarClienteDialogo() {
+        SistemaReserva sistema = SistemaReserva.getInstancia();
+        java.util.List<Cliente> clientes = sistema.getClientes();
+
+        if (clientes.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay clientes registrados.", "Error", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+        Cliente[] clientesArray = clientes.toArray(new Cliente[0]);
+        Cliente seleccionado = (Cliente) JOptionPane.showInputDialog(
+                this,
+                "Seleccione un cliente:",
+                "Seleccionar Cliente",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                clientesArray,
+                clientesArray[0]);
+
+        return seleccionado;
+    }
+
+    public static void main(String[] args) {
+        new VentanaPrincipal().setVisible(true);
+    }
 }

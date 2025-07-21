@@ -2,18 +2,16 @@ package logica;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
 
 /**
  * Esta clase representa el sistema de reservas de clases particulares.
  * Utiliza el patron de diseño Singleton para que solo haya una instancia
  * del sistema de reservas en el programa.
  *
- *
- *
- * El sistema permite agregar clientes, profesores, clases y gestionar reservas.
- * y ademas crear y cancelar reservas, y tambien obtener las reservas activas
- * de un cliente especifico.
- *
+ * El sistema permite agregar clientes, profesores, clases y gestionar reservas,
+ * y ademas crear y cancelar reservas, y obtener las reservas activas
+ * de un cliente específico.
  */
 public class SistemaReserva {
     private static SistemaReserva instancia;
@@ -24,9 +22,9 @@ public class SistemaReserva {
     private List<Reserva> reservas;
 
     /**
-     * Constructor privado para evitar creacion de instancias fuera del metodo
+     * Constructor privado para evitar creación de instancias fuera del método
      * {@link #getInstancia()}.
-     * Inicia las listas de clientes, profesores, clases, reservas.
+     * Inicia las listas de clientes, profesores, clases y reservas.
      */
     private SistemaReserva() {
         clientes = new ArrayList<>();
@@ -36,9 +34,9 @@ public class SistemaReserva {
     }
 
     /**
-     * Obtiene la instancia unica del sistema de reservas y si no existe la crea.
+     * Obtiene la instancia única del sistema de reservas y si no existe la crea.
      *
-     * @return La instancia unica del sistema de reservas.
+     * @return La instancia única del sistema de reservas.
      */
     public static SistemaReserva getInstancia() {
         if (instancia == null) {
@@ -57,7 +55,7 @@ public class SistemaReserva {
     }
 
     /**
-     * Agrega un profesor al sistema de reservas (En el futuro podria reducirlo a un solo profesor (yo)).
+     * Agrega un profesor al sistema de reservas (En el futuro podría reducirlo a un solo profesor).
      *
      * @param profesor El profesor que se va a agregar.
      */
@@ -111,21 +109,25 @@ public class SistemaReserva {
     }
 
     /**
-     * Crea una nueva reserva para un cliente y una clase particular. IMPORTANTE La reserva se
-     * confirma solo si hay cupos disponibles en la clase.
+     * Crea una nueva reserva para un cliente y una clase particular.
+     * IMPORTANTE: La reserva se confirma solo si hay cupos disponibles en la clase
+     * y no hay choque con otras reservas.
      *
      * @param cliente El cliente que realiza la reserva.
      * @param clase La clase que se reserva.
      * @param metodoPago El metodo de pago elegido para la reserva.
      * @return La nueva reserva creada.
      * @throws CupoExcedidoException Ocurre cuando no hay cupos disponibles para la clase.
+     * @throws ReservaDuplicadaException Ocurre cuando el cliente ya tiene una reserva confirmada para la misma clase.
+     * @throws HorarioNoDisponibleException Ocurre cuando la nueva reserva choca con otra ya confirmada.
      */
-    public Reserva crearReserva(Cliente cliente, ClaseParticular clase, Reserva.MetodoPago metodoPago) throws CupoExcedidoException {
-        if (clase.getCuposDisponibles() == 0) {
-            throw new CupoExcedidoException("No hay cupo disponible para esta clase.");
-        }
+    public Reserva crearReserva(Cliente cliente, ClaseParticular clase, Reserva.MetodoPago metodoPago) throws Exception {
+        Reserva reserva = new Reserva(cliente, clase, LocalDateTime.now(), metodoPago);
 
-        Reserva reserva = new Reserva(cliente, clase, java.time.LocalDateTime.now(), metodoPago);
+        new ValidadorCupo().validar(reserva);
+        new ValidadorDuplicado().validar(reserva);
+        new ValidadorHorario().validar(reserva);
+
         reservas.add(reserva);
         clase.reservarCupo();
         cliente.agregarReserva(reserva);
@@ -147,7 +149,7 @@ public class SistemaReserva {
     }
 
     /**
-     * Obtiene una lista de reservas confirmadas para un cliente especifico.
+     * Obtiene una lista de reservas confirmadas para un cliente específico.
      *
      * @param cliente El cliente del cual se desean obtener las reservas.
      * @return Una lista de reservas confirmadas para el cliente.

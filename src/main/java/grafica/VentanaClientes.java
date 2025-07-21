@@ -8,6 +8,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Ventana para gestionar clientes.
+ * Permite agregar nuevos clientes y visualizar la lista de clientes registrados en el sistema.
+ */
 public class VentanaClientes extends JFrame {
 
     private JTextField nombreField;
@@ -16,8 +20,12 @@ public class VentanaClientes extends JFrame {
     private JList<Cliente> listaClientes;
     private JButton btnVolver;
 
+    /**
+     * Constructor de la ventana de gestion de clientes.
+     * Inicializa los componentes de la ventana, incluyendo el formulario para agregar clientes y la lista de clientes registrados.
+     */
     public VentanaClientes() {
-        setTitle("Gestión de Clientes");
+        setTitle("Gestion de Clientes");
         setSize(400, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -68,6 +76,10 @@ public class VentanaClientes extends JFrame {
         panel.add(btnVolver, BorderLayout.SOUTH);
     }
 
+    /**
+     * Registra un nuevo cliente en el sistema.
+     * Toma los valores de los campos de texto, valida que no estén vacíos y luego agrega el cliente al sistema.
+     */
     private void registrarCliente() {
         String nombre = nombreField.getText().trim();
         String contacto = contactoField.getText().trim();
@@ -83,6 +95,9 @@ public class VentanaClientes extends JFrame {
         }
     }
 
+    /**
+     * Carga los clientes registrados en el sistema y los muestra en la lista.
+     */
     private void cargarClientes() {
         for (Cliente c : SistemaReserva.getInstancia().getClientes()) {
             modeloListaClientes.addElement(c);

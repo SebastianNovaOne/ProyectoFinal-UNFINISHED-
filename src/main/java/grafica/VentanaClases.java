@@ -17,6 +17,18 @@ public class VentanaClases extends JFrame {
     private Cliente clienteActual;
     private JButton btnVolver;
 
+    public VentanaClases(Cliente cliente) {
+        super("Clases Disponibles");
+        this.clienteActual = cliente;
+        sistemaReserva = SistemaReserva.getInstancia();
+        inicializarComponentes();
+        cargarClases();
+        setEventos();
+        setSize(700, 400);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+
     private void inicializarComponentes() {
         String[] columnas = {"Prueba", "Profesor", "Fecha y Hora", "Duración (min)", "Cupos Disponibles"};
         modeloTabla = new DefaultTableModel(columnas, 0) {

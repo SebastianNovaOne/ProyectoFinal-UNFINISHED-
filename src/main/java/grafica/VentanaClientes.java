@@ -48,6 +48,8 @@ public class VentanaClientes extends JFrame {
 
         add(panel);
 
+        cargarClientes();
+
         agregarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,6 +80,12 @@ public class VentanaClientes extends JFrame {
             contactoField.setText("");
         } else {
             JOptionPane.showMessageDialog(VentanaClientes.this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void cargarClientes() {
+        for (Cliente c : SistemaReserva.getInstancia().getClientes()) {
+            modeloListaClientes.addElement(c);
         }
     }
 }

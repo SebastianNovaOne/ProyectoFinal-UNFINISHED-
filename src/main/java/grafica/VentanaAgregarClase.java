@@ -8,6 +8,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Ventana para agregar nuevas clases al sistema.
+ * Permite seleccionar el tipo de prueba, el profesor, la fecha y hora, la duracion y los cupos disponibles para la clase.
+ */
 public class VentanaAgregarClase extends JFrame {
 
     private SistemaReserva sistemaReserva;
@@ -20,6 +24,10 @@ public class VentanaAgregarClase extends JFrame {
     private JButton btnGestionarProfesores;
     private JButton btnVolver;
 
+    /**
+     * Constructor de la ventana para agregar clases.
+     * Inicializa los componentes de la ventana, incluyendo los campos para ingresar los detalles de la clase.
+     */
     public VentanaAgregarClase() {
         sistemaReserva = SistemaReserva.getInstancia();
 
@@ -85,6 +93,9 @@ public class VentanaAgregarClase extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Carga la lista de profesores desde el sistema de reservas y los agrega al combo de selección.
+     */
     private void cargarProfesores() {
         List<Profesor> profesores = sistemaReserva.getProfesores();
         for (Profesor profesor : profesores) {
@@ -92,6 +103,10 @@ public class VentanaAgregarClase extends JFrame {
         }
     }
 
+    /**
+     * Agrega una nueva clase al sistema de reservas.
+     * Recoge los valores de los campos de la ventana, valida los datos y luego los guarda en el sistema.
+     */
     private void agregarClase() {
         try {
             Prueba tipoPrueba = (Prueba) comboTipoPrueba.getSelectedItem();
@@ -127,6 +142,9 @@ public class VentanaAgregarClase extends JFrame {
         }
     }
 
+    /**
+     * Actualiza el combo de profesores eliminando todos los elementos y recargando la lista de profesores.
+     */
     public void actualizarComboProfesores() {
         comboProfesor.removeAllItems();
         cargarProfesores();
